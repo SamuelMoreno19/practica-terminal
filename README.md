@@ -629,3 +629,124 @@ biblioteca/  documentos/  mi_Proyecto/  mi_practica/    proyecto/  secretos/    
 # Pregunta de Reflexión: ¿Qué opción usarías para encontrar rápidamente un archivo oculto importante?
 Respuesta:
 - Usaría ls -a. Es la única forma de que la terminal te muestre los archivos que empiezan con un punto (.), ya que el sistema los oculta por defecto para no llenar la vista de archivos de configuración.
+
+# Leccion 4 copiar archivos y directorios con el comando cp en Linux
+- Ejercicio 1: Copiar un archivo:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch prueba2.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cp prueba2.txt copia_prueba2.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto   archivo1.txt  archivo3.txt biblioteca  copia_prueba2.txt fotos mi_directorio  música proyecto_final prueba2.txt  trabajo
+README.md  archivo2.txt  archivo_grande  codigo documentos  mi_Proyecto  mi_practica proyecto  prueba.txt      secretos     videos
+
+- Ejercicio 2: Copiar un directorio:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir carpeta1
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch carpeta1/archivo1.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cp -r carpeta1 carpeta2
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls carpeta2
+archivo1.txt
+
+- Ejercicio 3: Usar opciones avanzadas:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cp -fv carpeta1/archivo1.txt carpeta2/
+'carpeta1/archivo1.txt' -> 'carpeta2/archivo1.txt'
+
+# Laboratorio 1: Copiar un archivo simple:
+SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch archivo.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cp archivo1.txt copia_archivo1.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cp archivo.txt copia_archivo.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto     archivo1.txt  archivo_grande  carpeta2           copia_prueba2.txt  mi_Proyecto    música          prueba.txt   trabajo
+README.md    archivo2.txt  biblioteca      codigo             documentos         mi_directorio  proyecto        prueba2.txt  videos
+archivo.txt  archivo3.txt  carpeta1        copia_archivo.txt  fotos              mi_practica    proyecto_final  secretos
+
+- Preguntas de reflexion : Preguntas de Reflexión:
+- ¿Qué sucede si el archivo origen no existe: La terminal arroja un error (No such file or directory) y no realiza ninguna copia.
+- ¿Qué pasa si el archivo de destino ya existe: El comando cp lo sobrescribe automáticamente sin pedir confirmación, reemplazando el contenido viejo por el nuevo.
+
+# Laboratorio 2: Copiar un archivo a otro directorio:
+SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir documentos
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cp archivo1.txt documentos/
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cd documentos
+@SamuelMoreno19 ➜ /workspaces/practica-terminal/documentos (main) $ ls
+archivo1.txt
+
+- Preguntas de reflexion: ¿Qué sucede si el directorio de destino no existe: el comando cp no creara la carpeta automáticamente sino que en su lugar, tratará el destino como un nombre de archivo nuevo y copiará el origen ahí.
+- ¿Cómo puedes copiar un archivo a un directorio fuera del directorio actual: Aca debemos utilizar las rutas, como los siguientes ejemplos: 
+Ruta relativa: cp archivo.txt ../otra_carpeta/ (sube un nivel).
+Ruta absoluta: cp archivo.txt /home/usuario/documentos/ (ruta completa).
+
+# Laboratorio 3: Copiar múltiples archivos:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal/documentos (main) $ cd ..
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch archivo2.txt archivo3.txt archivo4.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cp archivo2.txt archivo3.txt archivo4.txt documentos/
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls documentos/
+archivo1.txt  archivo2.txt  archivo3.txt  archivo4.txt
+
+- Preguntas de reflexion: ¿Qué sucede si uno de los archivos no existe: nuestro comando (cp) copiará todos los archivos que si pueda encontrar, pero lanzará un mensaje de error por cada archivo que no exista. La operación no se detiene y sigue trabajando.
+- Cómo puedes copiar todos los archivos .txt de un directorio: Usando el comodín asterisco (wildcard): cp *.txt destino/. Esto selecciona automáticamente cualquier archivo que termine con esa extensión.
+
+# Laboratorio 4: Copiar un directorio completo:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir proyectos
+touch proyectos/archivo5.txt proyectos/archivo6.txt
+SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cp -r proyectos proyectos_copia
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls proyectos_copia/
+archivo5.txt  archivo6.txt
+
+- Preguntas de reflexion: ¿Qué sucede si omites la opción r al copiar un directorio: El comando fallará y mostrará un error (omitting directory). cp no puede copiar carpetas por defecto si no se le indica que sea recursivo.
+- ¿Cómo copiar solo ciertos archivos dentro de un directorio: Usando patrones o comodines. Por ejemplo:
+- cp proyectos/*.jpg destino/ (solo imágenes JPG).
+- cp proyectos/archivo[1-3].txt destino/ (solo los archivos del 1 al 3).
+
+# Laboratorio 5: Forzar la sobrescritura de archivos:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch archivo7.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cp archivo7.txt documentos/
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cp -f archivo7.txt documentos/
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls documentos/
+archivo1.txt  archivo2.txt  archivo3.txt  archivo4.txt  archivo7.txt
+
+- Preguntas reflexion: ¿Qué sucede si no usas la opción f: El archivo se sobrescribe directamente y de forma silenciosa. No aparece ningún mensaje de advertencia en la terminal.
+- ¿Cómo puedes evitar que se sobrescriba un archivo existente: Omitiendo la opción -f y verificando manualmente con ls antes de copiar, ya que por defecto el comando no pide confirmación.
+
+# Laboratorio 6: Mostrar mensajes detallados:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cp -v archivo7.txt documentos/
+'archivo7.txt' -> 'documentos/archivo7.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cp -fv archivo7.txt documentos/
+'archivo7.txt' -> 'documentos/archivo7.txt'
+
+- ¿Qué información adicional muestra la opción v: Muestra la confirmación visual de la operación, indicando la ruta del archivo original y hacia dónde fue copiado con una flecha: 'origen' -> 'destino'.
+- ¿Cómo puedes combinar v con otras opciones como f: Se pueden agrupar después de un solo guion. Por ejemplo, cp -fv aplica tanto la fuerza como el mensaje detallado al mismo tiempo, como se ve en la terminal.
+
+# Laboratorio 7: Preservar atributos de archivos:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch archivo8.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch -d "2022-01-01" archivo8.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cp -p archivo8.txt copia_archivo8.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls -l archivo8.txt copia_archivo8.txt
+-rw-rw-rw- 1 codespace codespace 0 Jan  1  2022 archivo8.txt
+-rw-rw-rw- 1 codespace codespace 0 Jan  1  2022 copia_archivo8.txt
+
+- Preguntas de reflexion: ¿Qué atributos se preservan con la opción p: Se preservan los metadatos originales: los permisos y de(lectura, escritura, ejecución), el propietario (owner) y las marcas de tiempo (fecha y hora de la modificación).
+- ¿Qué sucede si no usas la opción p: El archivo copiado se crea con los permisos por defecto del sistema y lo más importante, se le asigna la fecha y hora del momento actual, perdiendo la información de cuándo se modificó el original.
+
+# Laboratorio 8: Copiar archivos con patrones:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch archivo_a.txt archivo_b.txt archivo_c.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cp archivo_*.txt documentos/
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls documentos/
+archivo1.txt  archivo2.txt  archivo3.txt  archivo4.txt  archivo7.txt  archivo_a.txt  archivo_b.txt  archivo_c.txt
+
+- Preguntas de reflexion: ¿Qué otros patrones puedes usar para seleccionar archivos: El signo de interrogación (?): Reemplaza exactamente un solo carácter (ej: doc?.txt para doc1.txt, docA.txt) - Los corchetes ([]): Para definir rangos o listas (ej: archivo[1-3].txt para copiar solo el 1, 2 y 3).
+- ¿Cómo puedes copiar archivos que terminen con un patrón específico: Usando el asterisco al principio del patrón: cp *patron.extensión destino/. Por ejemplo, para copiar todo lo que termine en "final", usarías cp *final.txt documentos/
+
+# Laboratorio 9: Copiar archivos entre diferentes sistemas de archivos:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cp /media/usb/archivo_usb.txt .
+cp: cannot stat '/media/usb/archivo_usb.txt': No such file or directory
+
+- Preguntas de reflexion: ¿Qué sucede si el dispositivo USB no está montado: La terminal nos mostrará un error de "archivo o directorio no encontrado" (No such file or directory), ya que el sistema no reconoce la ruta /media/usb como un acceso activo a los archivos.
+- ¿Cómo puedes verificar las ubicaciones de los dispositivos conectados: Usando el comando ls /media. Como los USB se montan ahí, listar esa carpeta te permite ver qué dispositivos están disponibles para copiar.
+
+# Laboratorio 10: Resolver errores comunes:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cp archivo_inexistente.txt documentos/
+cp: cannot stat 'archivo_inexistente.txt': No such file or directory
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cp archivo1.txt directorio_inexistente/
+cp: cannot create regular file 'directorio_inexistente/': Not a directory
+
+- Preguntas de reflexion: ¿Qué mensaje de error recibes cuando el archivo de origen no existe: Como podemos ver en la salida de la terminal (No such file or directory) nos dira que ese archivo o directorio no existe, como era el caso, estabamos probando que nos diria la terminal.
+- ¿Qué mensaje de error recibes cuando el directorio de destino no existe:  Aca directamente nos dira que no es un directorio y que esta vez, no existe, entonces como no encuentra una carpeta con ese nombre nos dira (Not a directory) como salida de la terminal. 
