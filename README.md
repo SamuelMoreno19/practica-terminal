@@ -750,3 +750,303 @@ cp: cannot create regular file 'directorio_inexistente/': Not a directory
 
 - Preguntas de reflexion: ¿Qué mensaje de error recibes cuando el archivo de origen no existe: Como podemos ver en la salida de la terminal (No such file or directory) nos dira que ese archivo o directorio no existe, como era el caso, estabamos probando que nos diria la terminal.
 - ¿Qué mensaje de error recibes cuando el directorio de destino no existe:  Aca directamente nos dira que no es un directorio y que esta vez, no existe, entonces como no encuentra una carpeta con ese nombre nos dira (Not a directory) como salida de la terminal. 
+
+# Leccion 5 Moviendo y Renombrando Archivos con el Comando mv en Linux
+# Ejercicio 1: Renombrar un archivo:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch archivo10.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mv archivo10.txt nuevo_nombre.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto      archivo2.txt  archivo8.txt   archivo_grande  codigo              documentos     mi_practica       proyecto_final   prueba2.txt
+README.md     archivo3.txt  archivo_a.txt  biblioteca      copia_archivo.txt   fotos          música            proyectos        secretos
+archivo.txt   archivo4.txt  archivo_b.txt  carpeta1        copia_archivo8.txt  mi_Proyecto    nuevo_nombre.txt  proyectos_copia  trabajo
+archivo1.txt  archivo7.txt  archivo_c.txt  carpeta2        copia_prueba2.txt   mi_directorio  proyecto          prueba.txt       videos
+
+# Ejercicio 2: Renombrar un directorio
+Crea un directorio llamado carpeta_vieja:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir carpeta_vieja
+Renombra el directorio a carpeta_nueva:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mv carpeta_vieja carpeta_nueva
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto      archivo2.txt  archivo8.txt   archivo_grande  carpeta_nueva       copia_prueba2.txt  mi_directorio     proyecto         prueba.txt   videos
+README.md     archivo3.txt  archivo_a.txt  biblioteca      codigo              documentos         mi_practica       proyecto_final   prueba2.txt
+archivo.txt   archivo4.txt  archivo_b.txt  carpeta1        copia_archivo.txt   fotos              música            proyectos        secretos
+archivo1.txt  archivo7.txt  archivo_c.txt  carpeta2        copia_archivo8.txt  mi_Proyecto        nuevo_nombre.txt  proyectos_copia  trabajo
+
+# Ejercicio 3: Mover un archivo a otro directorio
+Crea un directorio llamado documentos:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir documentos2
+Crea un archivo llamado informe.txt:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch informe.txt
+Verifica que el archivo se haya movido:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls documentos2/
+informe.txt
+
+# Ejercicio 4: Mover múltiples archivos
+Crea varios archivos:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch archivo5.txt archivo6.txt archivo9.txt
+Mueve todos los archivos .txt al directorio documentos:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mv *.txt documentos2/
+Verifica el contenido del directorio documentos:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls documentos2/
+archivo.txt   archivo2.txt  archivo4.txt  archivo6.txt  archivo8.txt  archivo_a.txt  archivo_c.txt      copia_archivo8.txt  informe.txt       prueba.txt
+archivo1.txt  archivo3.txt  archivo5.txt  archivo7.txt  archivo9.txt  archivo_b.txt  copia_archivo.txt  copia_prueba2.txt   nuevo_nombre.txt  prueba2.txt
+
+# Ejercicio 5: Mover y renombrar al mismo tiempo
+Crea un archivo llamado datos.txt:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch datos.txt
+Mueve el archivo datos.txt al directorio documentos y renómbralo como backup_datos.txt:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mv datos.txt documentos/backup_datos.txt
+Verifica el resultado:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls documentos2/
+archivo.txt   archivo3.txt  archivo6.txt  archivo9.txt   archivo_c.txt      copia_archivo8.txt  nuevo_nombre.txt
+archivo1.txt  archivo4.txt  archivo7.txt  archivo_a.txt  backup_datos.txt   copia_prueba2.txt   prueba.txt
+archivo2.txt  archivo5.txt  archivo8.txt  archivo_b.txt  copia_archivo.txt  informe.txt         prueba2.txt
+
+# Ejercicio 6: Usar la opción i
+Crea dos archivos con el mismo nombre en diferentes ubicaciones:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch archivo_existente.txt
+touch documentos2/archivo_existente.txt
+Intenta mover el archivo del directorio actual al directorio documentos con la opción i:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mv -i archivo_existente.txt documentos2/
+mv: overwrite 'documentos2/archivo_existente.txt'? y
+
+# Ejercicio 7: Usar la opción u
+Crea un archivo en el directorio actual y modifícalo:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch archivo_viejo.txt
+echo "Contenido viejo" > archivo_viejo.txt
+Copia el archivo al directorio documentos2:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cp archivo_viejo.txt documentos2/
+Modifica el archivo original:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ echo "Contenido nuevo" > archivo_viejo.txt
+Usa la opción u para mover el archivo solo si es más reciente:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mv -u archivo_viejo.txt documentos2/
+Verifica el contenido del archivo en el directorio documentos2:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cat documentos2/archivo_viejo.txt
+Contenido nuevo
+
+# Desafio final
+Crear la base del proyecto
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir proyectos2 
+¿Qué hace?: Crea la carpeta principal donde iniciaremos el trabajo.
+Salida: (Silencio). Significa que el directorio se creó correctamente en la ruta actual.
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch proyectos2/tarea1.txt proyectos2/tarea2.txt proyectos2/tarea3.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mv proyectos2/tarea1.txt documentos2/proyecto1.txt
+mv proyectos2/tarea2.txt documentos2/proyecto2.txt
+mv proyectos2/tarea3.txt documentos2/proyecto3.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls documentos2
+archivo.txt   archivo3.txt  archivo6.txt  archivo9.txt   archivo_c.txt          backup_datos.txt    copia_prueba2.txt  proyecto1.txt  prueba.txt
+archivo1.txt  archivo4.txt  archivo7.txt  archivo_a.txt  archivo_existente.txt  copia_archivo.txt   informe.txt        proyecto2.txt  prueba2.txt
+archivo2.txt  archivo5.txt  archivo8.txt  archivo_b.txt  archivo_viejo.txt      copia_archivo8.txt  nuevo_nombre.txt   proyecto3.txt
+
+# Laboratorio 1: Renombrar Archivos Simples:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch prueba1.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mv prueba1.txt archivo_renombrado.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto        archivo_renombrado.txt  carpeta2       documentos   mi_Proyecto    música          proyectos        secretos
+README.md       biblioteca              carpeta_nueva  documentos2  mi_directorio  proyecto        proyectos2       trabajo
+archivo_grande  carpeta1                codigo         fotos        mi_practica    proyecto_final  proyectos_copia  videos
+
+# Laboratorio 2: Renombrar Directorios:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir temporal
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mv temporal archivos_temporales
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto        archivo_renombrado.txt  carpeta1       codigo       fotos          mi_practica  proyecto_final  proyectos_copia  videos
+README.md       archivos_temporales     carpeta2       documentos   mi_Proyecto    música       proyectos       secretos
+archivo_grande  biblioteca              carpeta_nueva  documentos2  mi_directorio  proyecto     proyectos2      trabajo
+
+# Laboratorio 3: Mover Archivos a Otro Directorio:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir documento
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch informe.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mv informe.txt documento/
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls documento/
+informe.txt
+
+# Laboratorio 4: Mover Múltiples Archivos:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch archivo1.txt archivo2.txt archivo3.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir respaldos
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mv *.txt respaldos/
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls respaldos/
+archivo1.txt  archivo2.txt  archivo3.txt  archivo_renombrado.txt
+
+# Laboratorio 5: Mover y Renombrar al Mismo Tiempo:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch datos_originales.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir backup
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mv datos_originales.txt backup/datos_backup.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls backup/
+datos_backup.txt
+
+# Laboratorio 6: Evitar Sobrescritura con i:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch archivo_existente.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir documento
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mv -i archivo_existente.txt documento/
+mv: overwrite 'documento/archivo_existente.txt'? n
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls documento/
+archivo_existente.txt  informe.txt
+
+# Laboratorio 7: Actualizar Solo Archivos Nuevos con u:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch archivo_viejo.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ echo "Contenido viejo" > archivo_viejo.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir respaldo
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cp archivo_viejo.txt respaldo/
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ echo "Contenido nuevo" > archivo_viejo.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mv -u archivo_viejo.txt respaldo/
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ cat respaldo/archivo_viejo.txt
+Contenido nuevo
+
+# Laboratorio 8: Mover Archivos a Rutas Absolutas:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch archivo_absoluto.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mv archivo_absoluto.txt /tmp/
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls /tmp/
+archivo_absoluto.txt  dockerd.log  storage_version.txt         vscode-ipc-5566146e-c746-438a-b3ec-2f6b25c6ac20.sock
+codespaces_logs       sshd.log     vscode-git-d78a5843f5.sock  vscode-ipc-efda31ab-f80a-45b0-b8a8-417ffeb23536.sock
+
+# Laboratorio 9: Mover Archivos con Espacios en el Nombre:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch "mi archivo.txt"
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir destino
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mv "mi archivo.txt" destino/
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls destino/
+'mi archivo.txt'
+
+# Lección 6: Eliminar archivos y directorios con rm y rmdir
+# Ejercicio 1: Eliminar archivos específicos:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch prueba.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ rm prueba.txt
+
+# Ejercicio 2: Eliminar un directorio vacío:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir temporal
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ rmdir temporal
+
+# Ejercicio 3: Eliminar un directorio no vacío:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir proyecto3
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch proyecto3/archivo1 proyecto3/archivo2
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ rm -r proyecto3
+
+# Desafío final:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir -p proyecto4/{src,docs,tests}
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch proyecto4/src/main.c proyecto4/docs/manual.txt proyecto4/tests/test1.py
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ rm -r proyecto4
+
+# Laboratorio 1: Crear y eliminar un archivo básico:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch archivo1.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto      archivo_existente.txt  backup      carpeta2       destino     documentos2  mi_directorio  proyecto        proyectos2       respaldos  videos
+README.md     archivo_grande         biblioteca  carpeta_nueva  documento   fotos        mi_practica    proyecto_final  proyectos_copia  secretos
+archivo1.txt  archivos_temporales    carpeta1    codigo         documentos  mi_Proyecto  música         proyectos       respaldo         trabajo
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ 
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ rm archivo1.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto               archivo_grande       biblioteca  carpeta_nueva  documento    fotos          mi_practica  proyecto_final  proyectos_copia  secretos
+README.md              archivos_temporales  carpeta1    codigo         documentos   mi_Proyecto    música       proyectos       respaldo         trabajo
+archivo_existente.txt  backup               carpeta2    destino        documentos2  mi_directorio  proyecto     proyectos2      respaldos        videos
+
+# Laboratorio 2: Eliminar múltiples archivos:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch archivoA.txt archivoB.txt archivoC.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto      archivoC.txt           backup      carpeta_nueva  documentos   mi_directorio  proyecto_final   respaldo   videos
+README.md     archivo_existente.txt  biblioteca  codigo         documentos2  mi_practica    proyectos        respaldos
+archivoA.txt  archivo_grande         carpeta1    destino        fotos        música         proyectos2       secretos
+archivoB.txt  archivos_temporales    carpeta2    documento      mi_Proyecto  proyecto       proyectos_copia  trabajo
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ rm archivoA.txt archivoB.txt archivoC.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto               archivo_grande       biblioteca  carpeta_nueva  documento    fotos          mi_practica  proyecto_final  proyectos_copia  secretos
+README.md              archivos_temporales  carpeta1    codigo         documentos   mi_Proyecto    música       proyectos       respaldo         trabajo
+archivo_existente.txt  backup               carpeta2    destino        documentos2  mi_directorio  proyecto     proyectos2      respaldos        videos
+
+# Laboratorio 3: Eliminar con confirmación:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch importante.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ rm -i importante.txt
+rm: remove regular empty file 'importante.txt'? n
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ rm -i importante.txt
+rm: remove regular empty file 'importante.txt'? y
+
+# Laboratorio 4: Eliminar un directorio vacío:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir vacío
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto               archivos_temporales  carpeta2       documento    mi_Proyecto    proyecto        proyectos_copia  trabajo
+README.md              backup               carpeta_nueva  documentos   mi_directorio  proyecto_final  respaldo         vacío
+archivo_existente.txt  biblioteca           codigo         documentos2  mi_practica    proyectos       respaldos        videos
+archivo_grande         carpeta1             destino        fotos        música         proyectos2      secretos
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ rmdir vacío
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto               archivo_grande       biblioteca  carpeta_nueva  documento    fotos          mi_practica  proyecto_final  proyectos_copia  secretos
+README.md              archivos_temporales  carpeta1    codigo         documentos   mi_Proyecto    música       proyectos       respaldo         trabajo
+archivo_existente.txt  backup               carpeta2    destino        documentos2  mi_directorio  proyecto     proyectos2      respaldos        videos
+
+# Laboratorio 5: Intentar eliminar un directorio no vacío:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir lleno
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch lleno/archivo1.txt lleno/archivo2.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ rmdir lleno
+rmdir: failed to remove 'lleno': Directory not empty
+
+# Laboratorio 6: Eliminar un directorio no vacío con rm -r:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir proyecto5
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch proyecto5/main.py proyecto/config.json
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto               archivos_temporales  carpeta2       documento    lleno          música          proyectos2       secretos
+README.md              backup               carpeta_nueva  documentos   mi_Proyecto    proyecto5       proyectos_copia  trabajo
+archivo_existente.txt  biblioteca           codigo         documentos2  mi_directorio  proyecto_final  respaldo         videos
+archivo_grande         carpeta1             destino        fotos        mi_practica    proyectos       respaldos
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ rm -r proyecto5
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto               archivo_grande       biblioteca  carpeta_nueva  documento    fotos        mi_directorio  proyecto_final  proyectos_copia  secretos
+README.md              archivos_temporales  carpeta1    codigo         documentos   lleno        mi_practica    proyectos       respaldo         trabajo
+archivo_existente.txt  backup               carpeta2    destino        documentos2  mi_Proyecto  música         proyectos2      respaldos        videos
+
+# Laboratorio 7: Eliminar con confirmación recursiva:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir datos
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch datos/registro.txt datos/backup.log
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ rm -ri datos
+rm: descend into directory 'datos'? n
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ rm -ri datos
+rm: descend into directory 'datos'? y
+rm: remove regular empty file 'datos/registro.txt'? n
+rm: remove regular empty file 'datos/backup.log'? n
+rm: remove directory 'datos'? n
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ rm -ri datos
+rm: descend into directory 'datos'? y
+rm: remove regular empty file 'datos/registro.txt'? y
+rm: remove regular empty file 'datos/backup.log'? y
+rm: remove directory 'datos'? y
+
+# Laboratorio 8: Forzar la eliminación sin confirmación:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir temp
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch temp/file1.txt temp/file2.txt
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto               archivos_temporales  carpeta2       documento    lleno          música          proyectos_copia  temp
+README.md              backup               carpeta_nueva  documentos   mi_Proyecto    proyecto_final  respaldo         trabajo
+archivo_existente.txt  biblioteca           codigo         documentos2  mi_directorio  proyectos       respaldos        videos
+archivo_grande         carpeta1             destino        fotos        mi_practica    proyectos2      secretos
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ rm -rf temp
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto               archivo_grande       biblioteca  carpeta_nueva  documento    fotos        mi_directorio  proyecto_final  proyectos_copia  secretos
+README.md              archivos_temporales  carpeta1    codigo         documentos   lleno        mi_practica    proyectos       respaldo         trabajo
+archivo_existente.txt  backup               carpeta2    destino        documentos2  mi_Proyecto  música         proyectos2      respaldos        videos
+
+# Laboratorio 9: Estructura compleja de directorios:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir -p proyecto3/{src,docs,tests}
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ touch proyecto3/src/main.c proyecto3/docs/manual.txt proyecto3/tests/test1.py
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto               archivos_temporales  carpeta2       documento    lleno          música          proyectos2       secretos
+README.md              backup               carpeta_nueva  documentos   mi_Proyecto    proyecto3       proyectos_copia  trabajo
+archivo_existente.txt  biblioteca           codigo         documentos2  mi_directorio  proyecto_final  respaldo         videos
+archivo_grande         carpeta1             destino        fotos        mi_practica    proyectos       respaldos
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ rm -r proyecto3
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto               archivo_grande       biblioteca  carpeta_nueva  documento    fotos        mi_directorio  proyecto_final  proyectos_copia  secretos
+README.md              archivos_temporales  carpeta1    codigo         documentos   lleno        mi_practica    proyectos       respaldo         trabajo
+archivo_existente.txt  backup               carpeta2    destino        documentos2  mi_Proyecto  música         proyectos2      respaldos        videos
+
+# Laboratorio 10: Desafío final:
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ mkdir -p trabajo/{informes,temporal,archivos}
+touch trabajo/informes/reporte1.doc trabajo/temporal/notas.txt trabajo/archivos/datos.csv
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto               archivo_grande       biblioteca  carpeta_nueva  documento    fotos        mi_directorio  proyecto_final  proyectos_copia  secretos
+README.md              archivos_temporales  carpeta1    codigo         documentos   lleno        mi_practica    proyectos       respaldo         trabajo
+archivo_existente.txt  backup               carpeta2    destino        documentos2  mi_Proyecto  música         proyectos2      respaldos        videos
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ rm -r trabajo/temporal
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ rm -r trabajo
+@SamuelMoreno19 ➜ /workspaces/practica-terminal (main) $ ls
+Proyecto               archivo_grande       biblioteca  carpeta_nueva  documento    fotos        mi_directorio  proyecto_final  proyectos_copia  secretos
+README.md              archivos_temporales  carpeta1    codigo         documentos   lleno        mi_practica    proyectos       respaldo         videos
+archivo_existente.txt  backup               carpeta2    destino        documentos2  mi_Proyecto  música         proyectos2      respaldos
+
